@@ -1,0 +1,552 @@
+1. Write a Program to Remove Duplicates from a String.
+
+To remove duplicate characters from a string, you can use a Set since it automatically handles uniqueness.
+
+Example:
+
+java
+Copy code
+import java.util.*;
+
+public class RemoveDuplicates {
+    public static void main(String[] args) {
+        String input = "programming";
+        Set<Character> seenChars = new LinkedHashSet<>();
+        
+        for (char c : input.toCharArray()) {
+            seenChars.add(c);
+        }
+        
+        StringBuilder result = new StringBuilder();
+        for (char c : seenChars) {
+            result.append(c);
+        }
+        
+        System.out.println("String after removing duplicates: " + result);
+    }
+}
+Explanation:
+
+LinkedHashSet is used to maintain the insertion order while removing duplicates.
+Each character from the string is added to the set, ensuring that duplicates are ignored.
+2. Write a Program to Print Duplicate Characters from the String.
+
+This program finds and prints the duplicate characters in the string.
+
+Example:
+
+java
+Copy code
+import java.util.*;
+
+public class PrintDuplicates {
+    public static void main(String[] args) {
+        String input = "programming";
+        Map<Character, Integer> charCount = new HashMap<>();
+        
+        // Count occurrences of each character
+        for (char c : input.toCharArray()) {
+            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+        }
+        
+        System.out.print("Duplicate characters: ");
+        for (Map.Entry<Character, Integer> entry : charCount.entrySet()) {
+            if (entry.getValue() > 1) {
+                System.out.print(entry.getKey() + " ");
+            }
+        }
+    }
+}
+Explanation:
+
+A HashMap is used to count the occurrences of each character.
+Characters that appear more than once are printed as duplicates.
+3. Write a Program to Check if "2552" is a Palindrome or Not.
+
+A palindrome is a word or number that reads the same backward as forward.
+
+Example:
+
+java
+Copy code
+public class PalindromeCheck {
+    public static void main(String[] args) {
+        String str = "2552";
+        String reverse = new StringBuilder(str).reverse().toString();
+        
+        if (str.equals(reverse)) {
+            System.out.println(str + " is a palindrome.");
+        } else {
+            System.out.println(str + " is not a palindrome.");
+        }
+    }
+}
+Explanation:
+
+The string is reversed using StringBuilder's reverse() method and compared to the original string.
+4. Write a Program to Count the Number of Consonants, Vowels, Special Characters in a String.
+
+The program counts the number of vowels, consonants, and special characters in a given string.
+
+Example:
+
+java
+Copy code
+public class CountCharacters {
+    public static void main(String[] args) {
+        String input = "Hello, World!";
+        int vowels = 0, consonants = 0, specialChars = 0;
+        
+        for (char c : input.toCharArray()) {
+            if (Character.isLetter(c)) {
+                if ("AEIOUaeiou".indexOf(c) != -1) {
+                    vowels++;
+                } else {
+                    consonants++;
+                }
+            } else if (!Character.isDigit(c)) {
+                specialChars++;
+            }
+        }
+        
+        System.out.println("Vowels: " + vowels);
+        System.out.println("Consonants: " + consonants);
+        System.out.println("Special characters: " + specialChars);
+    }
+}
+Explanation:
+
+It checks whether each character is a letter and whether it's a vowel or consonant.
+Special characters are counted if the character is not a digit or letter.
+5. Write a Program to Implement Anagram Checking with Least Inbuilt Methods Being Used.
+
+An anagram is a word or phrase formed by rearranging the letters of another.
+
+Example:
+
+java
+Copy code
+import java.util.*;
+
+public class AnagramCheck {
+    public static void main(String[] args) {
+        String str1 = "listen";
+        String str2 = "silent";
+        
+        char[] charArray1 = str1.toCharArray();
+        char[] charArray2 = str2.toCharArray();
+        
+        Arrays.sort(charArray1);
+        Arrays.sort(charArray2);
+        
+        if (Arrays.equals(charArray1, charArray2)) {
+            System.out.println(str1 + " and " + str2 + " are anagrams.");
+        } else {
+            System.out.println(str1 + " and " + str2 + " are not anagrams.");
+        }
+    }
+}
+Explanation:
+
+Both strings are converted to character arrays and sorted.
+The sorted arrays are compared to determine if the strings are anagrams.
+6. Write a Program to Implement Pangram Checking with Least Inbuilt Methods Being Used.
+
+A pangram is a sentence that contains every letter of the alphabet at least once.
+
+Example:
+
+java
+Copy code
+public class PangramCheck {
+    public static void main(String[] args) {
+        String str = "The quick brown fox jumps over the lazy dog";
+        str = str.toLowerCase().replaceAll("[^a-z]", "");  // Remove non-alphabetic characters
+        
+        boolean isPangram = true;
+        for (char c = 'a'; c <= 'z'; c++) {
+            if (str.indexOf(c) == -1) {
+                isPangram = false;
+                break;
+            }
+        }
+        
+        if (isPangram) {
+            System.out.println("The sentence is a pangram.");
+        } else {
+            System.out.println("The sentence is not a pangram.");
+        }
+    }
+}
+Explanation:
+
+All non-alphabet characters are removed, and the string is converted to lowercase.
+It checks if each letter from a to z is present in the string.
+7. Write a Program to Find if String Contains All Unique Characters.
+
+This program checks if a string contains all unique characters.
+
+Example:
+
+java
+Copy code
+public class UniqueCharacters {
+    public static void main(String[] args) {
+        String str = "abcdef";
+        
+        Set<Character> charSet = new HashSet<>();
+        
+        for (char c : str.toCharArray()) {
+            if (!charSet.add(c)) {
+                System.out.println("The string does not contain all unique characters.");
+                return;
+            }
+        }
+        
+        System.out.println("The string contains all unique characters.");
+    }
+}
+Explanation:
+
+A HashSet is used to track the characters.
+If any character cannot be added (i.e., it's already in the set), the string does not contain all unique characters.
+8. Write a Program to Find the Maximum Occurring Character in a String.
+
+This program finds the most frequent character in the string.
+
+Example:
+
+java
+Copy code
+import java.util.*;
+
+public class MaxOccurringCharacter {
+    public static void main(String[] args) {
+        String str = "programming";
+        Map<Character, Integer> charCount = new HashMap<>();
+        
+        for (char c : str.toCharArray()) {
+            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+        }
+        
+        char maxChar = ' ';
+        int maxCount = 0;
+        
+        for (Map.Entry<Character, Integer> entry : charCount.entrySet()) {
+            if (entry.getValue() > maxCount) {
+                maxCount = entry.getValue();
+                maxChar = entry.getKey();
+            }
+        }
+        
+        System.out.println("Maximum occurring character: " + maxChar);
+    }
+}
+Explanation:
+
+A HashMap is used to count the frequency of each character.
+The character with the highest frequency is determined by iterating through the map.
+Let me know if you need any further explanations or modifications to the programs!
+
+
+You said:
+1 What is Mutable String in Java Explain with an exampl7 
+2 WAP to reverse a String ?
+input:“PWSKILLS” 
+output:“SLLIKSPW” 
+3. WAP to reverse a sentence while preserving the position
+Think Twice
+“kniht eciwt”
+4. WAP to sort a String Alphabetically
+ChatGPT said:
+ChatGPT
+1. What is a Mutable String in Java? Explain with an Example.
+In Java, a mutable string refers to a string that can be modified after its creation. Unlike the standard String class (which is immutable), Java provides a mutable version of the string through the StringBuilder and StringBuffer classes. These classes allow the modification of string values without creating new objects, which makes them more efficient when frequent string modification is needed.
+
+Example of Mutable String (using StringBuilder):
+
+java
+Copy code
+public class MutableStringExample {
+    public static void main(String[] args) {
+        // Creating a mutable string using StringBuilder
+        StringBuilder str = new StringBuilder("Hello");
+        
+        // Appending to the string
+        str.append(" World");
+        
+        // Modifying the string
+        str.replace(6, 11, "Java");
+        
+        // Reversing the string
+        str.reverse();
+        
+        // Printing the modified string
+        System.out.println("Modified String: " + str);
+    }
+}
+Output:
+
+arduino
+Copy code
+Modified String: avaJ olleH
+Explanation:
+
+StringBuilder allows us to modify the content of the string (e.g., append, replace, reverse) without creating a new object each time. This makes it more efficient for tasks involving frequent string manipulations.
+2. Write a Program to Reverse a String.
+To reverse a string, we can use StringBuilder's reverse() method or manually reverse it using a loop.
+
+Example:
+
+java
+Copy code
+public class ReverseString {
+    public static void main(String[] args) {
+        String input = "PWSKILLS";
+        
+        // Using StringBuilder to reverse the string
+        StringBuilder reversed = new StringBuilder(input);
+        System.out.println("Reversed String: " + reversed.reverse());
+    }
+}
+Output:
+
+arduino
+Copy code
+Reversed String: SLLIKSWP
+Explanation:
+
+The StringBuilder is used to create a mutable object from the input string. The reverse() method then reverses the string.
+3. Write a Program to Reverse a Sentence While Preserving the Position.
+In this program, we reverse each word in the sentence while keeping the positions of the words intact.
+
+Example:
+
+java
+Copy code
+public class ReverseSentence {
+    public static void main(String[] args) {
+        String input = "Think Twice";
+        String[] words = input.split(" ");
+        
+        StringBuilder result = new StringBuilder();
+        
+        // Reverse each word and append to result
+        for (String word : words) {
+            StringBuilder reversedWord = new StringBuilder(word);
+            result.append(reversedWord.reverse()).append(" ");
+        }
+        
+        // Removing the extra space at the end
+        System.out.println("Reversed Sentence: " + result.toString().trim());
+    }
+}
+Output:
+
+yaml
+Copy code
+Reversed Sentence: kniht eciwt
+Explanation:
+
+The sentence is split into words using split(" ").
+Each word is reversed individually using StringBuilder, and the results are concatenated back together with spaces.
+4. Write a Program to Sort a String Alphabetically.
+To sort the characters of a string alphabetically, you can convert the string into a character array, use Arrays.sort(), and then convert it back to a string.
+
+Example:
+
+java
+Copy code
+import java.util.Arrays;
+
+public class SortStringAlphabetically {
+    public static void main(String[] args) {
+        String input = "PWSKILLS";
+        
+        // Convert string to character array
+        char[] charArray = input.toCharArray();
+        
+        // Sort the array
+        Arrays.sort(charArray);
+        
+        // Convert sorted array back to string
+        String sortedString = new String(charArray);
+        
+        System.out.println("Sorted String: " + sortedString);
+    }
+}
+Output:
+
+arduino
+Copy code
+Sorted String: IKKLPSSW
+Explanation:
+
+The string is converted into a character array.
+Arrays.sort() is used to sort the characters alphabetically.
+Finally, the sorted array is converted back into a string.
+Let me know if you need any further explanations or adjustments!
+
+
+You said:
+1 Why do we need static keyword in Java Explain with an example? 
+
+2 What is class loading and how does the Java program actually executes? 
+3 Can we mark a local variable as static?
+
+4 Why is the static block executed before the main method in java?
+5 Why is a static method also called a class method?
+6 What is the use of static blocks in java?
+7 Difference between Static and Instance variable?
+8 Difference between static and non static members?
+ChatGPT said:
+ChatGPT
+1. Why Do We Need the static Keyword in Java? Explain with an Example.
+The static keyword in Java is used to declare class-level variables, methods, blocks, or nested classes that belong to the class rather than any instance (object) of the class. It is used when you want to access a member (variable, method) directly through the class without needing to instantiate it.
+
+Static variables are shared among all instances of the class.
+Static methods can be called without creating an instance of the class.
+Static blocks are used for initializing static variables or performing one-time operations before the main method is executed.
+Example:
+
+java
+Copy code
+class Counter {
+    static int count = 0;  // Static variable
+
+    // Static method
+    static void increment() {
+        count++;
+    }
+
+    public static void main(String[] args) {
+        Counter.increment(); // Calling static method without creating an instance
+        Counter.increment();
+        System.out.println("Count: " + Counter.count);  // Accessing static variable
+    }
+}
+Output:
+
+makefile
+Copy code
+Count: 2
+Explanation:
+
+The count variable and the increment() method are declared as static.
+These can be accessed without creating an instance of Counter.
+2. What is Class Loading, and How Does the Java Program Actually Execute?
+Class Loading refers to the process of loading class files into memory at runtime. In Java, the JVM loads the necessary classes when they are needed, instead of loading all classes at the beginning.
+
+The execution of a Java program involves the following steps:
+
+Source Code Compilation:
+The .java source code is compiled into bytecode (.class file) by the Java compiler.
+Class Loading:
+The ClassLoader loads classes as needed from the classpath (locations like .jar files, directories, etc.).
+Bytecode Verification:
+The bytecode is verified to ensure it's valid and secure to execute.
+Execution by JVM:
+The JVM starts execution from the main() method, interpreting or just-in-time compiling the bytecode to native machine code.
+3. Can We Mark a Local Variable as Static?
+No, local variables cannot be marked as static in Java. The static keyword is used for class-level members, but local variables are specific to the method or block in which they are defined. Therefore, marking a local variable as static would not be appropriate, as it would go against the idea that local variables are tied to method invocations.
+
+4. Why is the Static Block Executed Before the Main Method in Java?
+The static block is executed before the main method because static blocks are part of the class initialization process. The static block is executed when the class is loaded into memory, before any objects are created and before any methods (including main) are executed.
+
+Explanation:
+
+Static blocks are used for initializing static variables or performing one-time setup tasks when the class is loaded.
+The main method is the entry point of the program, but static blocks execute when the class is first referenced or loaded.
+Example:
+
+java
+Copy code
+public class StaticBlockExample {
+    static {
+        System.out.println("Static block executed");
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Main method executed");
+    }
+}
+Output:
+
+scss
+Copy code
+Static block executed
+Main method executed
+5. Why is a Static Method Also Called a Class Method?
+A static method is also called a class method because it is associated with the class itself, not with instances of the class. Static methods can be called using the class name directly, without creating an object of the class.
+
+Explanation:
+
+Static methods can access only static members (variables or methods) of the class.
+They are typically used for operations that don't require object-specific data and are the same for all instances.
+Example:
+
+java
+Copy code
+class MathOperations {
+    static int add(int a, int b) {
+        return a + b;
+    }
+}
+
+public class StaticMethodExample {
+    public static void main(String[] args) {
+        // Calling the static method without creating an object
+        int result = MathOperations.add(5, 3);
+        System.out.println("Sum: " + result);
+    }
+}
+Output:
+
+makefile
+Copy code
+Sum: 8
+6. What is the Use of Static Blocks in Java?
+A static block is used to initialize static variables or perform any setup tasks that need to be done only once when the class is loaded. Static blocks are executed before the main method when the class is first loaded into memory.
+
+Use cases for static blocks:
+
+Initializing static variables when complex initialization is needed.
+Performing setup operations such as logging or database connections before the class is used.
+Example:
+
+java
+Copy code
+public class StaticBlockExample {
+    static int data;
+
+    static {
+        // Static block to initialize the static variable
+        data = 100;
+        System.out.println("Static block executed. Data initialized.");
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Data: " + data);
+    }
+}
+Output:
+
+scss
+Copy code
+Static block executed. Data initialized.
+Data: 100
+7. Difference Between Static and Instance Variables
+Aspect	Static Variable	Instance Variable
+Memory Allocation	Allocated once per class (shared by all objects)	Allocated for each object of the class
+Scope	Belongs to the class, not to an instance	Belongs to the individual object (instance)
+Initialization	Initialized when the class is loaded	Initialized when an object is created
+Access	Can be accessed by using the class name	Accessed via an instance of the class
+Lifetime	Exists for the duration of the program	Exists as long as the object exists
+8. Difference Between Static and Non-Static Members
+Aspect	Static Member	Non-Static Member
+Belongs To	Belongs to the class	Belongs to an object instance
+Memory Allocation	Shared by all objects of the class	Each object gets its own copy
+Access	Accessed directly using the class name	Accessed via an object instance
+Initialization	Initialized when the class is loaded	Initialized when an object is created
+Lifetime	Exists for the duration of the program	Exists as long as the object exists
+Example	Static variables, static methods	Instance variables, instance methods
